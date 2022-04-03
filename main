@@ -1,0 +1,126 @@
+<!-- random number generator: 
+javascript program to generate a series of random integers based on lower limits / upper limits & number of results as specified
+by the user of the program.
+additional mathmatical operations can be performed on the series of results when the user selects checkboxes on the UI of the
+program.
+-->
+
+<!-- additional operations that can be performed:
+- square roots (finds sqaure roots of each number present in the result array)
+- prime numbers (finds any prime numbers that are present in the result array)
+- total sums (calculates the total sum of the numbers present in the result array)
+- mean / median / mode averages (calculate the Mean, Median & Mode averages of the entire result array)
+- ranges (calculates the range of numbers present in the result array)
+-->
+
+<!-- css styles -->
+<style type="text/css">
+    .pageContainer { 
+        width:100%; 
+        float:left; 
+        height:100%; 
+    }
+    .formContainer { 
+        width:25%; 
+        margin:0 auto; 
+    }
+    .limitInputs { 
+        margin:1em 0.5em 1em 0.5em; 
+        padding:0.5em 0.5em 0.5em 0.5em; 
+        border-radius:8px; 
+        float:left; 
+        width:100%; 
+    }
+    .submitButton { 
+        margin:1em 0.5em 1em 0.5em; 
+        padding:0.5em 0.5em 0.5em 0.5em; 
+        border-radius:10px; 
+        float:left; 
+        width:100%; 
+    }
+</style>
+
+<div class="pageContainer" id="mainBlock">
+        <div class="formContainer" id="formStart">
+            <input class="limitInputs" id="lowerLimit" type="number" />
+
+            <input class="limitInputs" id="upperLimit" type="number" />
+
+            <input class="limitInputs" id="numberOfResults" type="number" />
+
+            <button class="submitButton" id="showValues" onclick="showResults()">Show Values</button>
+            <!-- checkboxes for optional additional mathmatical operations -->
+            <button id="squareRoots" onclick="sqaureRoots()">Show Sqaure Roots</button>
+            <button id="totalSum" onclick="totalSum()">Calculate Sum Total</button> 
+        </div>
+</div>
+
+<script>
+// global array to hold randomly generated integers
+var resultsArray = [];
+
+// takes input for lower limt / upper limit & the number of results to generate
+function showResults() {
+    var lowerLimit = document.getElementById("lowerLimit").value;
+    var upperLimit = document.getElementById("upperLimit").value;
+    var numResults = document.getElementById("numberOfResults").value;
+    
+    // for each number between 0 and specified number of resutls...
+    for(let i = 0; i < numResults; i++) {
+        // calls function to generate a random integer between the lower limit & upper limit
+        var randomInteger = generate(lowerLimit, upperLimit);
+        // pushes each generated integer to the array of results
+        resultsArray.push(randomInteger);
+    }
+
+    window.alert(resultsArray);
+}
+
+// function to generate random integers
+function generate(lowerLimit, upperLimit) {
+    // returns result of random number generation
+    return Math.floor((Math.random() * upperLimit) + lowerLimit);
+}
+
+// function to find the square roots of each number in the result array
+function sqaureRoots() {
+    // gets the current numbers from the results array
+    var numbers = resultsArray;
+}
+
+// function to find the prime numbers (if any) in the results array
+function primeNumbers() {
+    // gets the current numbers from the results array
+    var numbers = resultsArray;
+}
+
+// function to calculate the total sum of all the numbers in the results array
+function totalSum() {
+    // gets the curernt numbers from the results array
+    var numbers = resultsArray;
+    // gets the length of the results array to determine how many numbers there are
+    var length = resultsArray.length;
+    // sets the inital sum total as 0
+    var initialSum = 0;
+    // for each number in the results array, add each one to the initalSum value
+    for(let i = 0; i < length; i++) {
+        initialSum += parseInt(numbers[i]);
+    }
+    // defines a totalSum variable to hold the final value
+    var totalSum = initialSum;
+    window.alert("Sum total of the numbers: " + totalSum);
+}
+
+// function to calculate the mean, median, mode averages of the results array data
+function averagesMMM() {
+    // gets the current numbers from the results array
+    var numbers = resultsArray;
+}
+
+// function to calculate the ranges of the results array
+function valueRanges() {
+    // gets the current numbers from the results array
+    var numbers = resultsArray;
+}
+
+</script>
