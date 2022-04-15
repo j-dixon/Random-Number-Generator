@@ -1,7 +1,7 @@
 <!-- random number generator: 
 javascript program to generate a series of random integers based on lower limits / upper limits & number of results as specified
 by the user of the program.
-additional mathmatical operations can be performed on the series of results when the user selects checkboxes on the UI of the
+ddditional mathmatical operations can be performed on the series of results when the user selects checkboxes on the UI of the
 program.
 -->
 
@@ -38,6 +38,9 @@ program.
         float:left; 
         width:100%; 
     }
+    .resultsArea {
+
+    }
 </style>
 
 <div class="pageContainer" id="mainBlock">
@@ -51,7 +54,12 @@ program.
             <button class="submitButton" id="showValues" onclick="showResults()">Show Values</button>
             <!-- checkboxes for optional additional mathmatical operations -->
             <button id="squareRoots" onclick="sqaureRoots()">Show Sqaure Roots</button>
-            <button id="totalSum" onclick="totalSum()">Calculate Sum Total</button> 
+            <button id="totalSum" onclick="totalSum()">Calculate Sum Total</button>
+            <button id="primeNumbers" onclick="primeNumbers()">Get Prime Numbers</button>  
+
+            <div class="resultsArea" id="resultsArea">
+
+            </div>
         </div>
 </div>
 
@@ -72,14 +80,18 @@ function showResults() {
         // pushes each generated integer to the array of results
         resultsArray.push(randomInteger);
     }
-
     window.alert(resultsArray);
 }
 
 // function to generate random integers
 function generate(lowerLimit, upperLimit) {
+    // parses each lowerLimit and upperLimit values into integers for random generation
+    var minValue = parseInt(lowerLimit);
+    var maxValue = parseInt(upperLimit);
+    // generates a random integer between the min and max values (inclusive)
+    var randomInt = Math.floor(Math.random () * (maxValue - minValue + 1)) + minValue;
     // returns result of random number generation
-    return Math.floor((Math.random() * upperLimit) + lowerLimit);
+    return randomInt;
 }
 
 // function to find the square roots of each number in the result array
@@ -90,20 +102,50 @@ function sqaureRoots() {
 
 // function to find the prime numbers (if any) in the results array
 function primeNumbers() {
-    // gets the current numbers from the results array
+    // gets the curernt result array to test
     var numbers = resultsArray;
+    // gets each number in the result array
+    for(let i = 0; i < numbers.length; i++) {
+        var currentNumber = numbers[i];
+        // creates blank array to hold all numbers between 1 and the curernt number (includes both 1 and the curernt number)
+        var lesserNumbers = [];
+        // creates blank array to hold all of the found factors of the current number
+        var factorsArray = [];
+        // for each number from and including 1 up to and including the current number...
+        for(let i = 1; i <= currentNumber; i++) {
+            // generates each of these lesser numbers and adds them to the new array
+            lesserNumbers.push(i);
+        }
+        // for each number in the lesserNumbers array
+        for(let i = 0; i < lesserNumbers.length; i++) {
+            // gets the curernt number to divide by
+            var numberToDivide = lesserNumbers[i];
+            // divides the current number in the result array by the current number in the lesserNumbers array
+            var result = currentNumber % numberToDivide;
+            // if the remainder of this operation is 0
+            if(result == 0)  {
+                // this number is a factor of the current number in the results array
+        
+                // each time a factor is found, add it to the factorsArray
+                factorsArray.push(numberToDivide);
+            } else {
+                // this number is not a factor of the current number in the results array
+
+            }
+        }
+        console.log(factorsArray);
+        displayOutput(resultsArray, factorsArray);
+    }
 }
 
 // function to calculate the total sum of all the numbers in the results array
 function totalSum() {
     // gets the curernt numbers from the results array
     var numbers = resultsArray;
-    // gets the length of the results array to determine how many numbers there are
-    var length = resultsArray.length;
     // sets the inital sum total as 0
     var initialSum = 0;
     // for each number in the results array, add each one to the initalSum value
-    for(let i = 0; i < length; i++) {
+    for(let i = 0; i < numbers.length; i++) {
         initialSum += parseInt(numbers[i]);
     }
     // defines a totalSum variable to hold the final value
@@ -121,6 +163,12 @@ function averagesMMM() {
 function valueRanges() {
     // gets the current numbers from the results array
     var numbers = resultsArray;
+}
+
+function displayOutput(initial, results) {
+    // define UI area for results to be displayed
+    var resultsArea = document.getElementById("resultsArea");
+    window.alert(results);
 }
 
 </script>
